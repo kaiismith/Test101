@@ -1,4 +1,5 @@
 class Person:
+    #Define function to make private variable
     def __init__(self, name, id, password, yob, gender, weight, height):
         self.__name = name
         self.__id = id
@@ -7,7 +8,7 @@ class Person:
         self.__password = password
         self.__weight = weight
         self.__height =height
-    
+    #Define function to get private variable
     def get_name(self):
         return self.__name
     
@@ -35,7 +36,7 @@ class Person:
     
     def get_BMI(self):
         return Person.get_weight()/ ((Person.get_weight())**2)
-    
+    #Define function to calculate body fat percentage with BMI got and age condition
     def get_body_fat(self, year): 
         age = Person.get_age(year)
         BMI = Person.get_BMI()
