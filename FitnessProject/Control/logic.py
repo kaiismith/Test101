@@ -2,6 +2,7 @@ import sqlite3
 from FitnessProject.Model.calculator import *
 from tkinter import messagebox
 
+
 class Logic:
     def check_sign_in(username, password):
         conn1 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
@@ -10,6 +11,16 @@ class Logic:
         results = cursor1.fetchall()
         for result in results:
             if username == result[0] and password == result[1]:
+                return True
+        return False
+
+    def check_admin(username, password):
+        connect = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
+        cursor = connect.cursor()
+        cursor.execute("SELECT username, password FROM user")
+        results = cursor.fetchall()
+        for result in results:
+            if username == "admin" and password == result[1]:
                 return True
         return False
 
@@ -45,7 +56,7 @@ class Logic:
 
         conn3.close()
 
-    def check_signup(username,name, password, cf_password):
+    def check_signup(username, name, password, cf_password):
         conn2 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor2 = conn2.cursor()
         cursor2.execute("SELECT username FROM user")
@@ -104,3 +115,12 @@ class Logic:
         Logic.calculate_stats(username)
 
         conn3.close()
+
+    def display(self, posx, posy):
+        conn4 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
+        cursor4 = conn4.cursor()
+        cursor4.execute("SELECT height, weight, bmi, bmr, bodyfat, lbm FROM health")
+        results = cursor4.fetchall()
+
+
+
