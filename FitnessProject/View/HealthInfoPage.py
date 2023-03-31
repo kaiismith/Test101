@@ -9,8 +9,10 @@ class HealthInfoPage(tk.Frame):
         self.controller = controller
 
         # username_entry = controller.frames['SignInPage'].username_entry
-
         username_entry = SignInPage.get_username_entry(self)
+
+
+        # print(username_entry.get())
 
 
         self.frame_photo_3 = tk.PhotoImage(file='Information.png')

@@ -1,9 +1,13 @@
 import sqlite3
 from FitnessProject.Model.calculator import *
 from tkinter import messagebox
+import tkinter as tk
 
 
 class Logic:
+    def __init__(self, username_entry):
+        self.username_entry = username_entry
+
     def check_sign_in(username, password):
         conn1 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor1 = conn1.cursor()
@@ -116,11 +120,38 @@ class Logic:
 
         conn3.close()
 
-    def display(self, posx, posy):
+    # Display text on HomePage
+    def display(user_name, posx, posy):
         conn4 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor4 = conn4.cursor()
-        cursor4.execute("SELECT height, weight, bmi, bmr, bodyfat, lbm FROM health")
+        cursor4.execute("SELECT username, height, weight, bmi, bmr, bodyfat, lbm FROM health")
         results = cursor4.fetchall()
+        for result in results:
+            if result[0] == user_name:
+                height = str(result[1])
+                weight = str(result[2])
+                bmi = str(result[3])
+                bmr = str(result[4])
+                bodyfat = str(result[5])
+                lbm = str(result[6])
+                # return [height, weight, bmi, bmr, bodyfat, lbm]
+
+        health_info = [height + "cm", weight + "kg", bmi + "kg/m2", bmr, bodyfat + "%", lbm + "lbf"]
+        idx = 0
+
+        for y in posy:
+            for x in posx:
+                info = tk.Label(bd=0, highlightthickness=0, borderwidth=0, font=('iCiel Gotham Medium', 15), text=health_info[idx], fg='#F5DF4D',
+                                bg='#212121')
+                info.place(x=x, y=y)
+                idx += 1
+
+
+        idx = 0
+
+
+
+
 
 
 

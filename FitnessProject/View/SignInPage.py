@@ -7,14 +7,18 @@ class SignInPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
+        posx = [267, 485]
+        posy = [304, 372, 440]
+
         self.frame_photo = tk.PhotoImage(file='Login (Eye close).png')
         frame_label = tk.Label(self, bd=0, bg='grey', image=self.frame_photo)
         frame_label.place(x=0, y=0)
         frame_label.bind('<B1-Motion>', controller.move_app)
 
+
         self.login_image = tk.PhotoImage(file='Login.png')
         login_button = tk.Button(self, image=self.login_image, borderwidth=0, bg='#141414', activebackground='#141414',
-                                 command=lambda: sign_in())
+                                 command=lambda: [sign_in()])
         login_button.place(x=171, y=585)
 
         global username_entry
@@ -30,6 +34,7 @@ class SignInPage(tk.Frame):
         password_entry.bind('<FocusOut>', lambda event: controller.on_focusout(event, password_entry, 'Password'))
         password_entry.place(x=188, y=507)
 
+        # Sign in
         def sign_in():
             found = Logic.check_sign_in(username_entry.get(), password_entry.get())
             found2 = Logic.check_admin(username_entry.get(), password_entry.get())
@@ -44,7 +49,9 @@ class SignInPage(tk.Frame):
             if not found1 and found:
                 controller.show_frame('HealthInfoPage')
             elif found1 and found:
+                # Go to HomePage and display on SignInPage but because it moves to HomePage first then info is on HomePage
                 controller.show_frame('HomePage')
+                Logic.display(username_entry.get(), posx, posy)
 
         def show_pw():
             hide_button = tk.Button(self, image=self.hide_image, command=hide_pw, activebackground='#141414', bd=0, bg='#141414')
