@@ -8,8 +8,10 @@ from SignInPage import *
 from SignUpPage import *
 from HealthInfoPage import *
 from HomePage import *
+from ChatPage import *
+from UpdateHealthInfoPage import *
 
-pyglet.font.add_file('GOTHAM-MEDIUM.OTF')
+pyglet.font.add_file(r'E:\USTH\Personal Fitness\FitnessProject\View\Image\GOTHAM-MEDIUM.OTF')
 
 
 class SampleApp(tk.Tk):
@@ -21,7 +23,7 @@ class SampleApp(tk.Tk):
         self.geometry('1920x1080')
         self.state('zoomed')
         self.title("UwU Gymnastics")
-        self.wm_attributes('-transparentcolor', 'grey')
+        self.wm_attributes('-transparentcolor')
         self.attributes('-fullscreen', True)
         self.overrideredirect(False)
         self.resizable(height=False, width=False)
@@ -32,7 +34,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (SignInPage, SignUpPage, HealthInfoPage, HomePage):
+        for F in (SignInPage, SignUpPage, HealthInfoPage, HomePage, ChatPage, UpdateHealthInfoPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -57,30 +59,6 @@ class SampleApp(tk.Tk):
         if entry.get() == '':
             entry.insert(0, default_text)
             entry.config(fg='#939597')
-
-
-
-class AbsPage:
-    pass
-
-
-class ChestPage:
-    pass
-
-
-
-
-
-class ChatPage:
-    pass
-
-
-class PersonalSettings:
-    pass
-
-
-class Exit:
-    pass
 
 
 if __name__ == "__main__":

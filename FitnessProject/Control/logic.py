@@ -1,7 +1,11 @@
 import sqlite3
+import subprocess
+
 from FitnessProject.Model.calculator import *
 from tkinter import messagebox
 import tkinter as tk
+
+info_widgets = []
 
 
 class Logic:
@@ -17,6 +21,23 @@ class Logic:
             if username == result[0] and password == result[1]:
                 return True
         return False
+
+    def update_health_info(age, gender, weight, height):
+        conn3 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
+        cursor3 = conn3.cursor()
+        cursor3.execute("SELECT username, gender, age, height, weight FROM health")
+        results = cursor3.fetchall()
+        with open("temp.txt",'r') as f:
+            user_name = f.read()
+        for result in results:
+            if user_name == result[0]:
+
+                query = "UPDATE health SET age = ?, gender = ?, weight = ?, height = ? WHERE username = ?"
+                cursor3.execute(query, (age, gender, weight, height, user_name))
+                conn3.commit()
+                break
+
+        conn3.close()
 
     def check_admin(username, password):
         connect = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
@@ -75,15 +96,18 @@ class Logic:
             else:
                 found = False
 
-        if password == cf_password:
-            if not found:
-                cursor2.execute("INSERT INTO user (username, name, password) VALUES (?, ?, ?)",
-                                (username, name, password))
-                messagebox.showinfo("Success", "New account created successfully")
-            else:
-                messagebox.showerror(title="Error", message="Invalid sign-up.")
+        if len(password) < 6:
+            messagebox.showerror(title="Error", message="Password must have at least 6 characters!")
         else:
-            messagebox.showerror(title="Error", message="Invalid sign-up.")
+            if password == cf_password:
+                if not found:
+                    cursor2.execute("INSERT INTO user (username, name, password) VALUES (?, ?, ?)",
+                                    (username, name, password))
+                    messagebox.showinfo("Success", "New account created successfully!")
+                else:
+                    messagebox.showerror(title="Error", message="Usename existed!")
+            else:
+                messagebox.showerror(title="Error", message="Password does not match!")
 
         conn2.commit()
         conn2.close()
@@ -120,12 +144,19 @@ class Logic:
 
         conn3.close()
 
+    def delete_info_widgets(self):
+        for widget in info_widgets:
+            widget.destroy()
+
     # Display text on HomePage
-    def display(user_name, posx, posy):
+    def display(posx, posy):
         conn4 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor4 = conn4.cursor()
         cursor4.execute("SELECT username, height, weight, bmi, bmr, bodyfat, lbm FROM health")
         results = cursor4.fetchall()
+        with open("temp.txt", "r") as f:
+            user_name = f.read()
+
         for result in results:
             if result[0] == user_name:
                 height = str(result[1])
@@ -136,22 +167,43 @@ class Logic:
                 lbm = str(result[6])
                 # return [height, weight, bmi, bmr, bodyfat, lbm]
 
-        health_info = [height + "cm", weight + "kg", bmi + "kg/m2", bmr, bodyfat + "%", lbm + "lbf"]
+        health_info = [height + "m", weight + "kg", bmi + "kg/m2", bmr, bodyfat + "%", lbm + "lbf"]
         idx = 0
 
         for y in posy:
             for x in posx:
-                info = tk.Label(bd=0, highlightthickness=0, borderwidth=0, font=('iCiel Gotham Medium', 15), text=health_info[idx], fg='#F5DF4D',
+                info = tk.Label(bd=0, highlightthickness=0, borderwidth=0, font=('iCiel Gotham Medium', 15),
+                                text=health_info[idx], fg='#F5DF4D',
                                 bg='#212121')
                 info.place(x=x, y=y)
+                info_widgets.append(info)
                 idx += 1
 
+    def open_db(self):
+        db_browser_path = r'E:\SQLLite\DB Browser for SQLite.exe'
+        db_file_path = r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db'
 
-        idx = 0
+        subprocess.Popen([db_browser_path, db_file_path])
 
+    def check_stats(self):
+        with open(r"E:\USTH\Personal Fitness\FitnessProject\View\temp.txt", 'r') as f:
+            username = f.read()
 
+        if username == "admin":
+            Logic.open_db(self)
+        else:
+            messagebox.showerror(title="Error", message="You're not admin!")
 
+    def join_course(course_name):
+        with open(r"E:\USTH\Personal Fitness\FitnessProject\View\temp.txt", 'r') as f:
+            username = f.read()
 
+        conn5 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
+        cursor = conn5.cursor()
+        cursor.execute(f"INSERT INTO {course_name} (username) VALUES (?)", username)
 
+        conn5.commit()
+        conn5.close()
 
-
+    def quit_program(frame):
+        frame.quit()
