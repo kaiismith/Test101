@@ -30,20 +30,6 @@ cursor.execute("INSERT INTO health (username, gender, age, height, weight, bmi, 
 
 connection.commit()
 
-#Create a table for exercise info
-cursor.execute("DROP TABLE IF EXISTS exercise")
-cursor.execute("CREATE TABLE IF NOT EXISTS exercise (id INTEGER PRIMARY KEY AUTOINCREMENT, exername CHAR, effectarea CHAR, difficulty CHAR, note CHARC)")
-
-
-#User table data dump
-cursor.execute("INSERT INTO exercise (exername, effectarea, difficulty, note) VALUES ('push-ups', 'overall', 'easy', 'none')")
-cursor.execute("INSERT INTO exercise (exername, effectarea, difficulty, note) VALUES ('triceps dips', 'arm', 'easy', 'chair required')")
-cursor.execute("INSERT INTO exercise (exername, effectarea, difficulty, note) VALUES ('floor tricep dips', 'arm', 'medium', 'optional tool: mattress')")
-cursor.execute("INSERT INTO exercise (exername, effectarea, difficulty, note) VALUES ('squats', 'leg', 'easy', 'none')")
-cursor.execute("INSERT INTO exercise (exername, effectarea, difficulty, note) VALUES ('cat cow pose', 'shoulder & back', 'easy', 'none')")
-
-connection.commit()
-
 # Create a table for fitness_for_beginners
 cursor.execute("DROP TABLE IF EXISTS fitness_for_beginners")
 cursor.execute("CREATE TABLE IF NOT EXISTS fitness_for_beginners (id INTEGER PRIMARY KEY AUTOINCREMENT, username CHAR)")
@@ -63,7 +49,6 @@ connection.commit()
 cursor.execute("DROP TABLE IF EXISTS yoga_mobility_challenge")
 cursor.execute("CREATE TABLE IF NOT EXISTS yoga_mobility_challenge (id INTEGER PRIMARY KEY AUTOINCREMENT, username CHAR)")
 connection.commit()
-
 
 #Total changes to the database and terminate connection
 print(connection.total_changes)

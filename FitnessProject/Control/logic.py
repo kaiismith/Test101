@@ -204,17 +204,29 @@ class Logic:
 
         conn5 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor = conn5.cursor()
+        cursor.execute("SELECT username FROM fitness_for_beginners")
+        results = cursor.fetchall()
 
-        if course_name == "fitness_for_beginners":
-            cursor.execute("INSERT INTO fitness_for_beginners (username) VALUES (?)", (username,))
-        elif course_name == "pose_method_for_marathon":
-            cursor.execute("INSERT INTO pose_method_for_marathon (username) VALUES (?)", (username,))
+        found = False
+        for result in results:
+            if username == result[0]:
+
+                found = True
+                break
+            else:
+                found = False
+
+        if not found:
+            if course_name == "fitness_for_beginners":
+                cursor.execute("INSERT INTO fitness_for_beginners (username) VALUES (?)", (username,))
+                Logic.register(course_name)
+
+        if course_name == "pose_method_for_marathon":
+            messagebox.showinfo(title="", message="COMING SOON!")
         elif course_name == "strength_development_for_runners":
-            cursor.execute("INSERT INTO strength_development_for_runners (username) VALUES (?)", (username,))
+            messagebox.showinfo(title="", message="COMING SOON!")
         elif course_name == "yoga_mobility_challenge":
-            cursor.execute("INSERT INTO yoga_mobility_challenge (username) VALUES (?)", (username,))
-
-        Logic.register(course_name)
+            messagebox.showinfo(title="", message="COMING SOON!")
 
         conn5.commit()
         conn5.close()

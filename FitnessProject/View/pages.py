@@ -10,7 +10,10 @@ from HealthInfoPage import *
 from HomePage import *
 from ChatPage import *
 from UpdateHealthInfoPage import *
-from FitnessForBeginner1 import *
+from FFB1 import *
+from FFB2 import *
+from FFB3 import *
+from FFB4 import *
 
 pyglet.font.add_file(r'E:\USTH\Personal Fitness\FitnessProject\View\Image\GOTHAM-MEDIUM.OTF')
 
@@ -35,7 +38,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        for F in (SignInPage, SignUpPage, HealthInfoPage, HomePage, ChatPage, UpdateHealthInfoPage, FitnessForBeginner1):
+        for F in (SignInPage, SignUpPage, HealthInfoPage, HomePage, ChatPage, UpdateHealthInfoPage, FFB1, FFB2, FFB3, FFB4):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame

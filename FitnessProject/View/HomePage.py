@@ -6,7 +6,7 @@ from tkinter import ttk
 from tkcalendar import *
 from datetime import datetime
 from tkinter import scrolledtext
-from FitnessForBeginner1 import *
+from FFB1 import *
 
 
 class HomePage(tk.Frame):
@@ -38,7 +38,8 @@ class HomePage(tk.Frame):
 
         # Notification Button
         self.noti_image = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Notification (off).png')
-        noti_button = tk.Button(self, image=self.noti_image, border=0, bg='#212121', activebackground='#212121')
+        noti_button = tk.Button(self, image=self.noti_image, border=0, bg='#212121', activebackground='#212121',
+                                command=lambda: messagebox.showinfo(title="NOTIFICATION", message="THERE'S NOTHING RECENTLY!"))
         noti_button.place(x=29, y=625)
 
         # Log Out Button
@@ -57,9 +58,8 @@ class HomePage(tk.Frame):
         self.course_image_1 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 1.png')
         course_label_1 = tk.Button(self, image=self.course_image_1, bd=0, bg='#212121', activebackground='#212121',
                                    command=lambda: [Logic.join_course("fitness_for_beginners"),
-                                                    controller.show_frame('FitnessForBeginner1'),
-                                                    Logic.delete_info_widgets(self),
-                                                    FitnessForBeginner1.print_text(self)])
+                                                    controller.show_frame('FFB1'),
+                                                    Logic.delete_info_widgets(self)])
         course_label_1.place(x=688, y=265)
 
         self.course_image_2 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 2.png')
@@ -75,15 +75,18 @@ class HomePage(tk.Frame):
         course_label_4.place(x=688, y=535)
 
         self.food_image_1 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Food 1.png')
-        food_label_1 = tk.Button(self, image=self.food_image_1, bd=0, bg='#212121', activebackground='#212121')
+        food_label_1 = tk.Button(self, image=self.food_image_1, bd=0, bg='#212121', activebackground='#212121',
+                                 command=lambda: messagebox.showinfo(title="UPDATING", message="WE'LL UPDATE SOON!"))
         food_label_1.place(x=688, y=822)
 
         self.food_image_2 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Food 2.png')
-        food_label_2 = tk.Button(self, image=self.food_image_2, bd=0, bg='#212121', activebackground='#212121')
+        food_label_2 = tk.Button(self, image=self.food_image_2, bd=0, bg='#212121', activebackground='#212121',
+                                 command=lambda: messagebox.showinfo(title="UPDATING", message="WE'LL UPDATE SOON!"))
         food_label_2.place(x=1086, y=822)
 
         self.food_image_3 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Food 3.png')
-        food_label_3 = tk.Button(self, image=self.food_image_3, bd=0, bg='#212121', activebackground='#212121')
+        food_label_3 = tk.Button(self, image=self.food_image_3, bd=0, bg='#212121', activebackground='#212121',
+                                 command=lambda: messagebox.showinfo(title="UPDATING", message="WE'LL UPDATE SOON!"))
         food_label_3.place(x=1478, y=822)
 
         # Calendar
