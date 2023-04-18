@@ -1,6 +1,5 @@
 import sqlite3
 import subprocess
-
 from FitnessProject.Model.calculator import *
 from tkinter import messagebox
 import tkinter as tk
@@ -185,6 +184,7 @@ class Logic:
         db_file_path = r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db'
 
         subprocess.Popen([db_browser_path, db_file_path])
+        messagebox.showinfo(title="ACCESS DATABASE", message="SUCCESSFULLY ACCESS DATABASE!")
 
     def check_stats(self):
         with open(r"E:\USTH\Personal Fitness\FitnessProject\View\temp.txt", 'r') as f:

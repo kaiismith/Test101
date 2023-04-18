@@ -4,7 +4,7 @@ from tkinter import scrolledtext
 from FitnessProject.Control.logic import *
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 class ChatPage(tk.Frame):

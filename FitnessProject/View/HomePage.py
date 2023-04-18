@@ -97,6 +97,6 @@ class HomePage(tk.Frame):
         time_now = tk.Label(self, text=f"{month} {year}", font=('iCiel Gotham Medium', 12), bg='#212121', fg="#E3E3E3")
         time_now.place(x=1525, y=292)
 
-        cal = Calendar(self, font="Arial 14", selectmode="day", year=2023, month=4, day=1)
+        cal = Calendar(self, font="Arial 14", selectmode="day", year=2023, month=4, day=18)
         cal.place(x=1390, y=330)
 
