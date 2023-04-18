@@ -7,7 +7,6 @@ class SignInPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
 
-
         # Create background for SignInPage
         self.frame_photo = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Login (Eye close).png')
         frame_label = tk.Label(self, bd=0, bg='grey', image=self.frame_photo)

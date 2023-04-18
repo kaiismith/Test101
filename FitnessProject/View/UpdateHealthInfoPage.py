@@ -43,7 +43,7 @@ class UpdateHealthInfoPage(tk.Frame):
         gender_entry.insert(0, gender)
         gender_entry.bind('<FocusIn>', lambda event: controller.on_entry_click(event, gender_entry, "gender"))
         gender_entry.bind('<FocusOut>', lambda event: controller.on_focusout(event, gender_entry, "gender"))
-        gender_entry.place(x=370, y=367)
+        gender_entry.place(x=366, y=367)
 
         weight_entry = tk.Entry(self, font=('iCiel Gotham Medium', 18), width=20, bg='#141414', bd=0, fg='#939597')
         weight_entry.insert(0, weight)

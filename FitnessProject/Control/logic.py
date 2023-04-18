@@ -27,7 +27,7 @@ class Logic:
         cursor3 = conn3.cursor()
         cursor3.execute("SELECT username, gender, age, height, weight FROM health")
         results = cursor3.fetchall()
-        with open("temp.txt",'r') as f:
+        with open("temp.txt", 'r') as f:
             user_name = f.read()
         for result in results:
             if user_name == result[0]:
@@ -38,6 +38,7 @@ class Logic:
                 break
 
         conn3.close()
+        Logic.calculate_stats(user_name)
 
     def check_admin(username, password):
         connect = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
@@ -194,13 +195,26 @@ class Logic:
         else:
             messagebox.showerror(title="Error", message="You're not admin!")
 
+    def register(course_name):
+        messagebox.showinfo(title="", message=f"You've have enrolled {course_name}!")
+
     def join_course(course_name):
         with open(r"E:\USTH\Personal Fitness\FitnessProject\View\temp.txt", 'r') as f:
             username = f.read()
 
         conn5 = sqlite3.connect(r'E:\USTH\Personal Fitness\FitnessProject\Model\Database\Fitness.db')
         cursor = conn5.cursor()
-        cursor.execute(f"INSERT INTO {course_name} (username) VALUES (?)", username)
+
+        if course_name == "fitness_for_beginners":
+            cursor.execute("INSERT INTO fitness_for_beginners (username) VALUES (?)", (username,))
+        elif course_name == "pose_method_for_marathon":
+            cursor.execute("INSERT INTO pose_method_for_marathon (username) VALUES (?)", (username,))
+        elif course_name == "strength_development_for_runners":
+            cursor.execute("INSERT INTO strength_development_for_runners (username) VALUES (?)", (username,))
+        elif course_name == "yoga_mobility_challenge":
+            cursor.execute("INSERT INTO yoga_mobility_challenge (username) VALUES (?)", (username,))
+
+        Logic.register(course_name)
 
         conn5.commit()
         conn5.close()

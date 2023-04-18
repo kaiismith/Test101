@@ -6,6 +6,7 @@ from tkinter import ttk
 from tkcalendar import *
 from datetime import datetime
 from tkinter import scrolledtext
+from FitnessForBeginner1 import *
 
 
 class HomePage(tk.Frame):
@@ -54,19 +55,23 @@ class HomePage(tk.Frame):
         pt_label_2.place(x=476, y=589)
 
         self.course_image_1 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 1.png')
-        course_label_1 = tk.Button(self, image=self.course_image_1, bd=0, bg='#212121', activebackground='#212121')
+        course_label_1 = tk.Button(self, image=self.course_image_1, bd=0, bg='#212121', activebackground='#212121',
+                                   command=lambda: [Logic.join_course("fitness_for_beginners"),
+                                                    controller.show_frame('FitnessForBeginner1'),
+                                                    Logic.delete_info_widgets(self),
+                                                    FitnessForBeginner1.print_text(self)])
         course_label_1.place(x=688, y=265)
 
         self.course_image_2 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 2.png')
-        course_label_2 = tk.Button(self, image=self.course_image_2, bd=0, bg='#212121', activebackground='#212121')
+        course_label_2 = tk.Button(self, image=self.course_image_2, bd=0, bg='#212121', activebackground='#212121', command=lambda: Logic.join_course("pose_method_for_marathon"))
         course_label_2.place(x=688, y=355)
 
         self.course_image_3 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 3.png')
-        course_label_3 = tk.Button(self, image=self.course_image_3, bd=0, bg='#212121', activebackground='#212121')
+        course_label_3 = tk.Button(self, image=self.course_image_3, bd=0, bg='#212121', activebackground='#212121', command=lambda: Logic.join_course("strength_development_for_runners"))
         course_label_3.place(x=688, y=445)
 
         self.course_image_4 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Course 4.png')
-        course_label_4 = tk.Button(self, image=self.course_image_4, bd=0, bg='#212121', activebackground='#212121')
+        course_label_4 = tk.Button(self, image=self.course_image_4, bd=0, bg='#212121', activebackground='#212121', command=lambda: Logic.join_course("yoga_mobility_challenge"))
         course_label_4.place(x=688, y=535)
 
         self.food_image_1 = tk.PhotoImage(file=r'E:\USTH\Personal Fitness\FitnessProject\View\Image\Food 1.png')
